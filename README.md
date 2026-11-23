@@ -202,6 +202,37 @@ Enterprise separation of concerns across 49 classes and 7 packages:
 
 ---
 
+## 📂 Enterprise Project Directory Structure
+
+```
+Online-Exam-System/
+├── src/                  # Enterprise Java Source Code (49 classes across 7 packages)
+│   ├── com/onlineexam/
+│   │   ├── main/         # Bootstrap & Application Lifecycle (Main.java)
+│   │   ├── dao/          # Data Access Objects, PBKDF2 Hashing, Proctoring & CTT (12 classes)
+│   │   ├── data/         # Domain Models, In-Memory State & PDF Builder (4 classes)
+│   │   └── ui/           # Design System Tokens, Glassmorphism & Motion Views (13 classes)
+│   │       ├── student/  # Candidate Portal, Proctored Runner & Scorecards (9 classes)
+│   │       └── admin/    # Admin Command Center, Proctor Audit & Analytics (8 classes)
+│   └── TestDB.java       # Database Diagnostic Utility (1 class)
+├── sql/                  # Relational Database Migration & Seed Scripts
+│   ├── database_setup.sql# Idempotent Schema DDL (8 InnoDB Tables)
+│   └── sample_data.sql   # Default Administrator/Student Accounts & 100 Sample MCQs
+├── docs/                 # Formal University Project Reports & Documentation
+│   ├── Online_Exam_System_Java_Project_Report.docx # Complete Word Report (1.50 MB, Times New Roman)
+│   ├── Java_Project_Report_Pagewise.md             # Complete Markdown Report (All 49 Classes)
+│   └── archive/          # Historical Drafts & Development Revisions Archive
+├── lib/                  # Pre-Packaged Runtime Dependencies (FlatLaf, MySQL, OpenPDF, Webcam)
+├── reportimages/         # High-Resolution Architectural Diagrams & Flow Screenshots
+├── tools/                # Offscreen UI Rendering & Screenshot Capture Utilities
+├── run.bat               # Windows Command Prompt One-Click Launcher
+├── run.ps1               # Native PowerShell One-Click Launcher
+├── README.md             # Project Showcase Documentation
+└── LICENSE               # MIT Open Source License
+```
+
+---
+
 ## 📂 Package Architecture (49 Java Classes)
 
 ```
@@ -265,8 +296,8 @@ com.onlineexam
 ### 2. Database Initialization
 Execute the setup scripts in MySQL Workbench or via CLI:
 ```bash
-mysql -u root -p < database_setup.sql
-mysql -u root -p < sample_data.sql
+mysql -u root -p < sql/database_setup.sql
+mysql -u root -p < sql/sample_data.sql
 ```
 
 ### 3. One-Click Launch (Windows)
@@ -283,8 +314,8 @@ run.bat
 
 #### Manual Compilation & Launch:
 ```powershell
-# Compile all classes into out/ directory
-javac -cp "lib/*" -d out *.java
+# Compile all source files from src/ into out/ directory
+javac -cp "lib/*" -d out (Get-ChildItem -Path src -Filter *.java -Recurse | Select-Object -ExpandProperty FullName)
 
 # Run database diagnostic check
 java -cp "out;lib/*" TestDB
@@ -307,8 +338,8 @@ java -cp "out;lib/*" com.onlineexam.main.Main
 
 The repository includes the complete, formal academic project documentation adhering to standard university submission rubrics:
 
-- 📄 **Word Document**: [`Online_Exam_System_Java_Project_Report.docx`](Online_Exam_System_Java_Project_Report.docx) *(1.50 MB, Times New Roman, pure black styling, native Word page breaks, and embedded high-res diagrams)*
-- 📝 **Markdown Report**: [`Java_Project_Report_Pagewise.md`](Java_Project_Report_Pagewise.md)
+- 📄 **Word Document**: [`docs/Online_Exam_System_Java_Project_Report.docx`](docs/Online_Exam_System_Java_Project_Report.docx) *(1.50 MB, Times New Roman, pure black styling, native Word page breaks, and embedded high-res diagrams)*
+- 📝 **Markdown Report**: [`docs/Java_Project_Report_Pagewise.md`](docs/Java_Project_Report_Pagewise.md)
 - 🌐 **Live Google Doc**: [Google Doc Project Report](https://docs.google.com/document/d/1wLFKMi-yDf_eAy1hBuASCnsFNO_sUGTMHFJLKsiCr-4/edit)
 
 ---
