@@ -1,5 +1,5 @@
 <!-- ============================================================ -->
-<!-- ONLINE EXAMINATION MANAGEMENT SYSTEM (OEMS) - GITHUB SHOWCASE -->
+<!-- ONLINE EXAMINATION MANAGEMENT SYSTEM (OEMS) - GITHUB REPOSITORY -->
 <!-- ============================================================ -->
 
 <div align="center">
@@ -14,79 +14,89 @@
 
 <br/><br/>
 
-<!-- SHIELD BADGES ROW -->
+<!-- 3D GLASSMORPHISM BADGES -->
 <p align="center">
   <img src="https://img.shields.io/badge/Java-17%2B%20%7C%2021%20LTS-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
   <img src="https://img.shields.io/badge/MySQL-8.0%20InnoDB-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
   <img src="https://img.shields.io/badge/GUI-FlatLaf%203.5-6366F1?style=for-the-badge&logo=java&logoColor=white" alt="FlatLaf" />
   <img src="https://img.shields.io/badge/Security-PBKDF2--HMAC--SHA256-10B981?style=for-the-badge&logo=shield&logoColor=white" alt="Security" />
+  <img src="https://img.shields.io/badge/Architecture-MVC%20%7C%20DAO%20%7C%20Singleton-8B5CF6?style=for-the-badge&logo=blueprint&logoColor=white" alt="Architecture" />
   <img src="https://img.shields.io/badge/License-MIT-0EA5E9?style=for-the-badge&logo=open-source-initiative&logoColor=white" alt="License" />
 </p>
 
+<!-- QUICK NAVIGATION -->
 <p align="center">
-  <a href="#-key-features">Key Features</a> •
-  <a href="#-system-architecture">Architecture</a> •
-  <a href="#-application-screens">Live Screens</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-project-report">Project Report</a>
+  <a href="#-core-innovations">Core Innovations</a> •
+  <a href="#-project-directory-structure">Directory Structure</a> •
+  <a href="#-package-architecture-49-java-classes">Package Architecture</a> •
+  <a href="#-tech-stack--dependencies">Tech Stack</a> •
+  <a href="#-quick-start--run-guide">Quick Start</a>
 </p>
 
 </div>
 
 ---
 
-## 🌟 Executive Overview
-
-**Online Examination Management System (OEMS)** is a next-generation desktop Computer-Based Testing (CBT) platform engineered in **Core Java (Swing, Java2D)** and **MySQL 8.0**. 
-
-Unlike conventional browser-based portals that are vulnerable to inspect-element tampering, unmonitored window switching, and network disconnect dropouts, OEMS runs as an isolated, hardware-accelerated desktop application that enforces JVM-level event interception, cryptographic credential protection, automated remote proctoring, and sub-millisecond execution response.
-
-<div align="center">
-  <img src="reportimages/fig01archflowchart.png" width="92%" alt="Multi-Tier Enterprise Architecture" />
-</div>
-
----
-
-## 🚀 Key Architectural Innovations
+## 🚀 Core Innovations
 
 <table width="100%">
 <tr>
 <td width="50%" valign="top">
 
-### 🛡️ Multi-Channel Proctoring
-- **JVM Focus Loss Interceptor**: Listens to OS-level window focus deactivations (`Alt+Tab`, `Win` key, push notifications).
-- **Global Key Hook Filtering**: Blocks cheating shortcuts (`Ctrl+C`, `Ctrl+V`, `Alt+F4`, function keys).
-- **Webcam Surveillance Daemon**: Captures candidate snapshots at randomized intervals with cumulative threat scoring.
-- **3-Strike Termination**: Automatically triggers emergency test submission upon exceeding violation limits.
+### 🛡️ Multi-Channel Proctoring Engine
+- **JVM Focus Loss Interceptor**: Real-time detection of OS window deactivations (`Alt + Tab`, Windows key, application switching).
+- **Global Keystroke Filtering**: Hooks `KeyboardFocusManager` to block cheating shortcuts (`Ctrl + C`, `Ctrl + V`, `Alt + F4`, function keys).
+- **Automated Webcam Surveillance**: Background daemon capturing periodic visual surveillance frames with dynamic threat index scoring.
+- **3-Strike Kiosk Termination**: Automated emergency submission triggering upon exceeding candidate violation thresholds.
 
 </td>
 <td width="50%" valign="top">
 
-### 🔐 Military-Grade Cryptography
-- **PBKDF2-HMAC-SHA256**: 120,000 iterative key-stretching rounds via `javax.crypto.SecretKeyFactory`.
-- **128-Bit CSPRNG Salts**: Cryptographically secure salts generated per user via `SecureRandom`.
-- **Automatic Legacy Migration**: Seamlessly upgrades legacy plaintext/SHA-256 hashes to PBKDF2 upon login.
-- **Session Locking**: Prevents concurrent logins across multiple devices using active UUID session tokens.
+### 🔐 Cryptographic Defense & Session Integrity
+- **PBKDF2-HMAC-SHA256**: 120,000 iterative key-stretching rounds via `javax.crypto.SecretKeyFactory` to defeat GPU/ASIC brute-force cracking.
+- **128-Bit CSPRNG Salts**: Cryptographically secure salts generated per account via `java.security.SecureRandom`.
+- **Transparent Migration**: Automatically upgrades legacy credentials to PBKDF2 upon successful candidate authentication.
+- **Concurrent Session Locking**: Validates active UUID tokens and runs 30-second heartbeat pings to eliminate multi-device proxy logins.
 
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 
-### 📊 Psychometric Item Analytics
-- **Classical Test Theory (CTT)**:
-  $$\text{Facility Index (Difficulty) } P = \frac{R}{N}$$
-  $$\text{Discrimination Index } D = \frac{U - L}{N_G}$$
-- **Kelley 27% Cohort Rule**: Computes discrimination power between top and bottom student quartiles.
-- **Distractor Efficiency Audit**: Flags non-functional choices and identifies ambiguous question stems.
+### 📊 Psychometric Item Analytics (CTT)
+- **Facility Value (Item Difficulty)**:
+  $$P = \frac{R}{N}$$
+  *Algorithms automatically classify items into Optimal, Easy, or Ambiguous difficulty tiers.*
+- **Discrimination Index ($D$)**:
+  $$D = \frac{U - L}{N_G}$$
+  *Calculates item discrimination power between upper and lower 27% student cohorts (Kelley's Rule).*
+- **Distractor Efficiency Audit**: Identifies dead choices and highlights confusing answer alternatives.
 
 </td>
 <td width="50%" valign="top">
 
-### 📜 Tamper-Proof Certification
-- **High-Density Vector PDF**: Generates archival certificates embedding candidate bonafides and institutional seals.
-- **SHA-256 Cryptographic Signature**: Calculates unique digital checksum across candidate score and timestamp.
-- **2D QR Matrix Verification**: Instant public and administrative verification via `VerifyCertificateUI.java`.
+### 📜 Tamper-Proof Vector Certification
+- **Dynamic PDF Compilation**: Automated vector PDF credential rendering with candidate metrics, grade badges, and institutional seals.
+- **SHA-256 Digital Fingerprint**: Computes unique cryptographic integrity checksum across student ID, exam ID, and score.
+- **2D QR Matrix Verification**: High-density QR matrix verifiable against official database records via `VerifyCertificateUI.java`.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### ⚡ Zero-Latency Desktop Experience
+- **FlatLaf Modern Design System**: Clean light SaaS theme, sub-pixel LCD font anti-aliasing hints, and responsive glassmorphic cards.
+- **EDT Concurrency Isolation**: All heavy database queries and hardware I/O operations are offloaded from the Event Dispatch Thread to maintain 60 FPS responsiveness.
+- **Custom Java2D Polar Graphics**: Trigonometric multi-axis competency radar projection visualizing candidate skill distribution.
+
+</td>
+<td width="50%" valign="top">
+
+### 🔄 Resilient Persistence & Transactions
+- **Type-4 JDBC Architecture**: Centralized thread-safe connection pooling in `DBConnection.java` with server-time query logic (`SELECT NOW()`).
+- **Two-Phase Atomic Transactions**: Full `COMMIT` and `ROLLBACK` guarantees saving exam attempts and individual responses synchronously.
+- **Idempotent Schema Migration**: `SchemaMigrator.java` dynamically evolves table structures and seeds catalogs at startup with zero data loss.
 
 </td>
 </tr>
@@ -94,177 +104,87 @@ Unlike conventional browser-based portals that are vulnerable to inspect-element
 
 ---
 
-## 📸 Complete Application Flow & Screen Demonstrations
-
-<div align="center">
-
-### 🎮 Candidate Assessment Experience
-
-<table>
-<tr>
-  <td align="center" width="50%">
-    <b>Split-Screen Authentication Gateway (<code>LoginUI</code>)</b><br/>
-    <img src="reportimages/screen01login.png" width="98%" alt="Login UI" /><br/>
-    <sub>PBKDF2-HMAC-SHA256 password derivation with database ping indicator</sub>
-  </td>
-  <td align="center" width="50%">
-    <b>Candidate Portal & Bento Dashboard (<code>StudentDashboard</code>)</b><br/>
-    <img src="reportimages/screen02studentdashboard.png" width="98%" alt="Student Dashboard" /><br/>
-    <sub>KPI summary cards, test attempt history, and quick launch tiles</sub>
-  </td>
-</tr>
-<tr>
-  <td align="center" width="50%">
-    <b>Assessment Catalog & Availability Gates (<code>SubjectSelectionUI</code>)</b><br/>
-    <img src="reportimages/screen03subjectselection.png" width="98%" alt="Subject Selection" /><br/>
-    <sub>Countdown schedule gates, attempt limit counters, and subject cards</sub>
-  </td>
-  <td align="center" width="50%">
-    <b>Proctoring Consent & Hardware Briefing (<code>InstructionsUI</code>)</b><br/>
-    <img src="reportimages/screen04instructions.png" width="98%" alt="Instructions" /><br/>
-    <sub>Mandatory webcam permission, exam rules, and integrity policies</sub>
-  </td>
-</tr>
-<tr>
-  <td align="center" width="50%">
-    <b>Distraction-Free Proctored Exam Runner (<code>ExamModule</code>)</b><br/>
-    <img src="reportimages/screen05exammodule.png" width="98%" alt="Exam Module" /><br/>
-    <sub>Live countdown timer, question palette navigation, and instant auto-save</sub>
-  </td>
-  <td align="center" width="50%">
-    <b>Executive Result Scorecard (<code>ResultUI</code>)</b><br/>
-    <img src="reportimages/screen09resultscorecard.png" width="98%" alt="Result Scorecard" /><br/>
-    <sub>Score breakdown, percentage accuracy, and one-click PDF generation</sub>
-  </td>
-</tr>
-</table>
-
-<br/>
-
-### 🛡️ Security, Proctoring & Administration Command Center
-
-<table>
-<tr>
-  <td align="center" width="50%">
-    <b>Remote Proctoring Audit Log (<code>ProctorLogUI</code>)</b><br/>
-    <img src="reportimages/screen06proctorlog.png" width="98%" alt="Proctor Log" /><br/>
-    <sub>Timestamped violation records, threat index scoring, and snapshot gallery</sub>
-  </td>
-  <td align="center" width="50%">
-    <b>Psychometric Item Analytics (<code>QuestionAnalyticsUI</code>)</b><br/>
-    <img src="reportimages/screen07questionanalytics.png" width="98%" alt="Question Analytics" /><br/>
-    <sub>Facility Index (P) & Discrimination (D) metrics flagging flawed questions</sub>
-  </td>
-</tr>
-<tr>
-  <td align="center" width="50%">
-    <b>Multi-Axis Competency Radar Chart (<code>StudentPerformanceUI</code>)</b><br/>
-    <img src="reportimages/screen10performanceradar.png" width="98%" alt="Performance Radar" /><br/>
-    <sub>Custom Java2D trigonometric polar projection of subject masteries</sub>
-  </td>
-  <td align="center" width="50%">
-    <b>Tamper-Proof Certificate Verification (<code>VerifyCertificateUI</code>)</b><br/>
-    <img src="reportimages/screen08verifycertificate.png" width="98%" alt="Verify Certificate" /><br/>
-    <sub>Public SHA-256 digital signature validation against MySQL ledger</sub>
-  </td>
-</tr>
-</table>
-
-</div>
-
----
-
-## 🏗️ System Architecture & Visual Process Models
-
-<details>
-<summary><b>🔍 Click to Expand Architectural Models & State Machines</b></summary>
-<br/>
-
-### 1. Examination Lifecycle State Machine
-Candidate progress is guarded by strict state machine transitions from identity verification to automated timeout submission:
-<div align="center">
-  <img src="reportimages/fig02examlifecycleflowchart.png" width="85%" alt="Lifecycle State Machine" />
-</div>
-
-### 2. Proctoring & Academic Integrity Subsystem
-Layered interceptor model auditing OS focus loss, keyboard scan codes, and webcam surveillance:
-<div align="center">
-  <img src="reportimages/fig03proctoringflowchart.png" width="85%" alt="Proctoring Subsystem" />
-</div>
-
-### 3. Object-Oriented Class Hierarchy & Package Decoupling
-Enterprise separation of concerns across 49 classes and 7 packages:
-<div align="center">
-  <img src="reportimages/fig04classhierarchy.png" width="85%" alt="Class Hierarchy" />
-</div>
-
-</details>
-
----
-
-## 📂 Enterprise Project Directory Structure
+## 📂 Project Directory Structure
 
 ```
 Online-Exam-System/
-├── src/                  # Enterprise Java Source Code (49 classes across 7 packages)
+├── src/                                  # All 49 Java source files organized into canonical packages
 │   ├── com/onlineexam/
-│   │   ├── main/         # Bootstrap & Application Lifecycle (Main.java)
-│   │   ├── dao/          # Data Access Objects, PBKDF2 Hashing, Proctoring & CTT (12 classes)
-│   │   ├── data/         # Domain Models, In-Memory State & PDF Builder (4 classes)
-│   │   └── ui/           # Design System Tokens, Glassmorphism & Motion Views (13 classes)
-│   │       ├── student/  # Candidate Portal, Proctored Runner & Scorecards (9 classes)
-│   │       └── admin/    # Admin Command Center, Proctor Audit & Analytics (8 classes)
-│   └── TestDB.java       # Database Diagnostic Utility (1 class)
-├── sql/                  # Relational Database Migration & Seed Scripts
-│   ├── database_setup.sql# Idempotent Schema DDL (8 InnoDB Tables)
-│   └── sample_data.sql   # Default Administrator/Student Accounts & 100 Sample MCQs
-├── docs/                 # Formal University Project Reports & Documentation
-│   ├── Online_Exam_System_Java_Project_Report.docx # Complete Word Report (1.50 MB, Times New Roman)
-│   ├── Java_Project_Report_Pagewise.md             # Complete Markdown Report (All 49 Classes)
-│   └── archive/          # Historical Drafts & Development Revisions Archive
-├── lib/                  # Pre-Packaged Runtime Dependencies (FlatLaf, MySQL, OpenPDF, Webcam)
-├── reportimages/         # High-Resolution Architectural Diagrams & Flow Screenshots
-├── tools/                # Offscreen UI Rendering & Screenshot Capture Utilities
-├── run.bat               # Windows Command Prompt One-Click Launcher
-├── run.ps1               # Native PowerShell One-Click Launcher
-├── README.md             # Project Showcase Documentation
-└── LICENSE               # MIT Open Source License
+│   │   ├── main/                         # Bootstrap & Application Lifecycle (Main.java)
+│   │   ├── dao/                          # Database Access, PBKDF2 Hashing, Sessions, & CTT (12 classes)
+│   │   ├── data/                         # Domain Models, In-Memory State & PDF Builder (4 classes)
+│   │   └── ui/                           # Design Tokens, Glassmorphism & Animations (13 classes)
+│   │       ├── student/                  # Candidate Dashboard, Proctored Runner & Scorecards (9 classes)
+│   │       └── admin/                    # Admin Command Center, Proctor Logs & Analytics (8 classes)
+│   └── TestDB.java                       # Database Diagnostic Utility (1 class)
+│
+├── sql/                                  # Relational Database Migration & Seed Scripts
+│   ├── database_setup.sql                # 8 Normalized InnoDB Tables & Foreign Keys
+│   └── sample_data.sql                   # Default Admin/Student Accounts & 100 Sample MCQs
+│
+├── docs/                                 # Project Documentation & Reports
+│   ├── Online_Exam_System_Java_Project_Report.docx # Word Report (1.50 MB, Times New Roman, Pure Black)
+│   ├── Java_Project_Report_Pagewise.md   # Complete Markdown Report (All 49 Classes Documented)
+│   └── archive/                          # Historical Revisions & Drafts Archive
+│
+├── lib/                                  # Pre-Packaged Runtime Dependencies (FlatLaf, MySQL, OpenPDF, Webcam)
+├── reportimages/                         # High-Resolution Architectural Flowcharts & UI Screen Captures
+├── tools/                                # Offscreen Screenshot Capture & Rendering Utilities
+├── run.bat                               # Windows Command Prompt One-Click Launcher
+├── run.ps1                               # Native PowerShell One-Click Launcher
+├── README.md                             # Project Showcase Documentation
+└── LICENSE                               # MIT Open Source License
 ```
 
 ---
 
 ## 📂 Package Architecture (49 Java Classes)
 
+| Package | Class Count | Architectural Responsibility | Key Design Patterns |
+|:---|:---:|:---|:---|
+| **`com.onlineexam.main`** | 1 | Application bootstrap, Look & Feel initialization, pre-flight checks, and EDT scheduling. | *Bootstrap Coordinator* |
+| **`com.onlineexam.dao`** | 12 | Thread-safe JDBC persistence, PBKDF2 key stretching, session locking, proctoring persistence, and CTT analytics. | *DAO, Singleton, Factory, Service* |
+| **`com.onlineexam.data`** | 4 | Immutable domain models, thread-safe in-memory state repository, answer evaluation, and vector PDF compilation. | *DTO, Value Object, Builder, Engine* |
+| **`com.onlineexam.ui`** | 13 | Reusable UI design system tokens, glassmorphic containers, physics animations, and authentication views. | *Component, Composite, Observer* |
+| **`com.onlineexam.ui.student`** | 9 | Candidate portal, assessment catalog, webcam consent, distraction-free kiosk exam runner, scorecards, and review. | *MVC View, State, Template Method* |
+| **`com.onlineexam.ui.admin`** | 8 | Administrator command center, exam authoring, question bank management, psychometrics console, and proctor audit. | *Dashboard, TableRenderer, Observer* |
+| **`com.onlineexam.test`** | 1 | Database network socket handshake and credential verification CLI utility. | *Diagnostic CLI* |
+
+<details>
+<summary><b>📋 Click to View the Complete 49-Class Inventory</b></summary>
+<br/>
+
 ```
-com.onlineexam
-├── main          # [1 Class] Application bootstrap, FlatLaf initialization, & schema checks
-│   └── Main.java
-├── dao           # [12 Classes] Thread-safe Type-4 JDBC, PBKDF2 hashing, sessions, & CTT analytics
-│   ├── DBConnection.java       ├── SchemaMigrator.java     ├── UserDAO.java
-│   ├── ExamDAO.java            ├── QuestionDAO.java        ├── AttemptDAO.java
-│   ├── SessionDAO.java         ├── SessionHeartbeat.java   ├── ProctorDAO.java
-│   ├── WebcamProctorService.java├── AchievementService.java ├── QuestionAnalyticsDAO.java
-│   └── CertificateService.java
-├── data          # [4 Classes] Domain models, in-memory state, scoring, & vector PDF builder
-│   ├── ExamConfig.java         ├── ExamStore.java
-│   ├── AnswerEvaluator.java    └── CertificatePdfBuilder.java
-├── ui            # [13 Classes] Reusable design tokens, glassmorphism, animations, & auth views
-│   ├── UITheme.java            ├── Anim.java               ├── GlassPanel.java
-│   ├── AuroraBackground.java   ├── AuthComponents.java     ├── DashboardComponents.java
-│   ├── PasswordStrengthMeter.java├── ConfettiPanel.java    ├── RadarChartPanel.java
-│   ├── GlassDialog.java        ├── DemoFrame.java          ├── LoginUI.java
-│   └── SignupUI.java
-├── ui.student    # [9 Classes] Candidate testing portal, proctored runner, results, & review
-│   ├── StudentDashboard.java   ├── SubjectSelectionUI.java ├── InstructionsUI.java
-│   ├── ExamModule.java         ├── ResultUI.java           ├── ReviewUI.java
-│   ├── StudentPerformanceUI.java├── ProfilePanel.java     └── AchievementsPanel.java
-├── ui.admin      # [8 Classes] Administration console, proctoring gallery, & question bank
-│   ├── AdminDashboard.java     ├── ExamManagementUI.java   ├── AddQuestionUI.java
-│   ├── ViewQuestionsUI.java    ├── PerformanceAnalysisUI.java├── QuestionAnalyticsUI.java
-│   ├── ProctorLogUI.java       └── VerifyCertificateUI.java
-└── test          # [1 Class] Database socket & driver diagnostic tool
-    └── TestDB.java
+com.onlineexam.main
+  └── Main.java
+com.onlineexam.dao
+  ├── DBConnection.java          ├── SchemaMigrator.java        ├── UserDAO.java
+  ├── ExamDAO.java               ├── QuestionDAO.java           ├── AttemptDAO.java
+  ├── SessionDAO.java            ├── SessionHeartbeat.java      ├── ProctorDAO.java
+  ├── WebcamProctorService.java  ├── AchievementService.java    ├── CertificateService.java
+  └── QuestionAnalyticsDAO.java
+com.onlineexam.data
+  ├── ExamConfig.java            ├── ExamStore.java
+  ├── AnswerEvaluator.java       └── CertificatePdfBuilder.java
+com.onlineexam.ui
+  ├── UITheme.java               ├── Anim.java                  ├── GlassPanel.java
+  ├── AuroraBackground.java      ├── AuthComponents.java        ├── DashboardComponents.java
+  ├── PasswordStrengthMeter.java ├── ConfettiPanel.java         ├── RadarChartPanel.java
+  ├── GlassDialog.java           ├── DemoFrame.java             ├── LoginUI.java
+  └── SignupUI.java
+com.onlineexam.ui.student
+  ├── StudentDashboard.java      ├── SubjectSelectionUI.java    ├── InstructionsUI.java
+  ├── ExamModule.java            ├── ResultUI.java              ├── ReviewUI.java
+  ├── StudentPerformanceUI.java  ├── ProfilePanel.java          └── AchievementsPanel.java
+com.onlineexam.ui.admin
+  ├── AdminDashboard.java        ├── ExamManagementUI.java      ├── AddQuestionUI.java
+  ├── ViewQuestionsUI.java       ├── PerformanceAnalysisUI.java ├── QuestionAnalyticsUI.java
+  ├── ProctorLogUI.java          └── VerifyCertificateUI.java
+Default Package
+  └── TestDB.java
 ```
+
+</details>
 
 ---
 
@@ -274,16 +194,19 @@ com.onlineexam
   <img src="https://skillicons.dev/icons?i=java,mysql,git,github,vscode,idea,eclipse" alt="Tech Stack Icons" />
 </div>
 
-| Layer | Technology | Purpose |
-|:---|:---|:---|
-| **Language** | **Java SE 17+ / 21 LTS** | Core object-oriented runtime, multithreaded concurrency |
-| **Presentation** | **Java Swing & Java2D** | Desktop window management, LCD anti-aliasing, vector graphics |
-| **Theme & UX** | **FlatLaf 3.5.x** | Modern light SaaS design system, glassmorphism, and rounded cards |
-| **Relational Database** | **MySQL 8.0 (InnoDB)** | ACID compliant transactions, referential foreign key integrity |
-| **Connectivity** | **MySQL Connector/J 9.x** | High-performance Type-4 JDBC driver with statement batching |
-| **Cryptography** | **Java Cryptography Architecture** | PBKDF2WithHmacSHA256 key stretching, CSPRNG salts |
-| **PDF & QR Engine** | **OpenPDF 1.3.40 & ZXing 3.5.3** | Dynamic vector certificate rendering, 2D QR matrix generation |
-| **Surveillance** | **Webcam-Capture 0.3.12 & BridJ** | Hardware video capture daemon for proctoring snapshots |
+<br/>
+
+| Layer | Component | Version | Purpose |
+|:---|:---|:---:|:---|
+| **Core Runtime** | **Java SE (OpenJDK)** | `17+ / 21 LTS` | Object-oriented application logic, multithreaded concurrency |
+| **UI Framework** | **Java Swing & Java2D** | Built-in | Window management, LCD sub-pixel font rendering, vector graphics |
+| **Look & Feel** | **FlatLaf** | `3.5.x` | Modern light design tokens, rounded borders, glassmorphic cards |
+| **Relational Database** | **MySQL Server (InnoDB)** | `8.0+` | Normalized relational storage, foreign keys, ACID transactions |
+| **Database Driver** | **MySQL Connector/J** | `9.x` | High-performance Type-4 JDBC driver with batch execution |
+| **Cryptography** | **Java Cryptography Architecture** | Built-in | PBKDF2WithHmacSHA256 stretching, 128-bit CSPRNG salts |
+| **Document Engine** | **OpenPDF** | `1.3.40` | Archival vector PDF certificate generation |
+| **QR Code Matrix** | **ZXing Core** | `3.5.3` | High-density 2D QR matrix generation and parsing |
+| **Hardware Video** | **Webcam-Capture & BridJ** | `0.3.12` | Asynchronous webcam frame surveillance daemon |
 
 ---
 
@@ -291,10 +214,10 @@ com.onlineexam
 
 ### 1. Prerequisites
 - **JDK**: Java Development Kit 17 or higher (`java -version`).
-- **MySQL**: MySQL Server 8.0 running on localhost port 3306.
+- **MySQL**: MySQL Server 8.0 running on `localhost:3306`.
 
 ### 2. Database Initialization
-Execute the setup scripts in MySQL Workbench or via CLI:
+Execute the SQL setup scripts in MySQL Workbench or via CLI:
 ```bash
 mysql -u root -p < sql/database_setup.sql
 mysql -u root -p < sql/sample_data.sql
@@ -317,46 +240,14 @@ run.bat
 # Compile all source files from src/ into out/ directory
 javac -cp "lib/*" -d out (Get-ChildItem -Path src -Filter *.java -Recurse | Select-Object -ExpandProperty FullName)
 
-# Run database diagnostic check
+# Verify database connection
 java -cp "out;lib/*" TestDB
 
 # Launch the Application
 java -cp "out;lib/*" com.onlineexam.main.Main
 ```
 
-### 4. Default Seed Credentials
-
-| Role | Username | Password | Access Level |
-|:---|:---|:---|:---|
-| **Administrator** | `admin` | `admin123` | Full admin console, question management, proctor logs, analytics |
-| **Student Candidate** | `student1` | `pass123` | Student dashboard, exam catalog, test runner, certificates |
-| **Student Candidate** | `student2` | `pass123` | Student dashboard, exam catalog, test runner, certificates |
-
 ---
-
-## 📑 Formal Academic Project Report
-
-The repository includes the complete, formal academic project documentation adhering to standard university submission rubrics:
-
-- 📄 **Word Document**: [`docs/Online_Exam_System_Java_Project_Report.docx`](docs/Online_Exam_System_Java_Project_Report.docx) *(1.50 MB, Times New Roman, pure black styling, native Word page breaks, and embedded high-res diagrams)*
-- 📝 **Markdown Report**: [`docs/Java_Project_Report_Pagewise.md`](docs/Java_Project_Report_Pagewise.md)
-- 🌐 **Live Google Doc**: [Google Doc Project Report](https://docs.google.com/document/d/1wLFKMi-yDf_eAy1hBuASCnsFNO_sUGTMHFJLKsiCr-4/edit)
-
----
-
-## 👤 Author & Maintainer
-
-<table align="center">
-  <tr>
-    <td align="center">
-      <a href="https://github.com/ash3422w">
-        <img src="https://avatars.githubusercontent.com/u/230601269?v=4" width="100px;" alt="Ashok Reddy" /><br />
-        <sub><b>Ashok Reddy (ash3422w)</b></sub>
-      </a><br />
-      <sub>Lead Software Architect & Security Engineer</sub>
-    </td>
-  </tr>
-</table>
 
 <div align="center">
 
