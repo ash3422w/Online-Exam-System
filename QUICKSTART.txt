@@ -1,0 +1,18 @@
+========================================================================
+ONLINE EXAMINATION MANAGEMENT SYSTEM (OEMS) - RELEASE v1.0.0
+========================================================================
+
+QUICK START INSTRUCTIONS:
+1. Ensure MySQL Server is running locally on port 3306.
+2. Initialize database if not done already:
+   mysql -u root -p < sql/database_setup.sql
+   mysql -u root -p < sql/sample_data.sql
+3. Run the application:
+   - Double-click 'run.bat' (Windows Command Prompt launcher)
+   - OR run '.\run.ps1' in PowerShell
+   - OR double-click 'OnlineExamSystem.jar' (if Java 17+ is associated)
+
+DEFAULT CREDENTIALS:
+- Administrator: admin / admin123
+- Student: student1 / pass123
+========================================================================

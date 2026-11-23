@@ -1,6 +1,21 @@
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=4,12,24,30&height=220&section=header&text=Online%20Examination%20System&fontSize=42&fontColor=ffffff&animation=twinkling" width="100%" alt="Online Examination System" />
+
+# 🎓 Online Examination System
+
+<p align="center">
+  <a href="https://github.com/ash3422w/Online-Exam-System/releases/latest">
+    <img src="https://img.shields.io/badge/Release-v1.0.0-3b82f6?style=for-the-badge&logo=github&logoColor=white" alt="Latest Release" />
+  </a>
+  <a href="https://github.com/ash3422w/Online-Exam-System/releases/download/v1.0.0/OnlineExamSystem-v1.0.0-Windows.zip">
+    <img src="https://img.shields.io/badge/Download-Standalone%20App%20(ZIP)-10b981?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows Release" />
+  </a>
+  <img src="https://img.shields.io/badge/Java-17%2B-f97316?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17+" />
+  <img src="https://img.shields.io/badge/Database-MySQL%208.0-0284c7?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL 8.0" />
+  <img src="https://img.shields.io/badge/License-MIT-8b5cf6?style=for-the-badge" alt="License" />
+</p>
+
 </div>
 
 ---
@@ -169,18 +184,28 @@ Default Package
 
 ## ⚡ Quick Start & Run Guide
 
-### 1. Prerequisites
+### 📦 Standalone Release (Ready to Run)
+1. Download the latest pre-packaged bundle: [**OnlineExamSystem-v1.0.0-Windows.zip**](https://github.com/ash3422w/Online-Exam-System/releases/download/v1.0.0/OnlineExamSystem-v1.0.0-Windows.zip)
+2. Extract the archive into any folder.
+3. Import `sql/database_setup.sql` into your local MySQL server (port 3306).
+4. Double-click `run.bat` or `OnlineExamSystem.jar` to start!
+
+---
+
+### 🛠️ Developer Setup & Source Launch
+
+#### 1. Prerequisites
 - **JDK**: Java Development Kit 17 or higher (`java -version`).
 - **MySQL**: MySQL Server 8.0 running on `localhost:3306`.
 
-### 2. Database Initialization
+#### 2. Database Initialization
 Execute the SQL setup scripts in MySQL Workbench or via CLI:
 ```bash
 mysql -u root -p < sql/database_setup.sql
 mysql -u root -p < sql/sample_data.sql
 ```
 
-### 3. One-Click Launch (Windows)
+#### 3. One-Click Launch (Windows)
 
 #### Native PowerShell:
 ```powershell

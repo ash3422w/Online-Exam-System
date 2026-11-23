@@ -11,12 +11,39 @@ import java.time.LocalDateTime;
 public final class DBConnection {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL =
-            "jdbc:mysql://localhost:3306/online_exam_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata";
-    private static final String USER = "exam_user";
-    private static final String PASS = "exam123";
 
     private DBConnection() {
+    }
+
+    private static String getUrl() {
+        String env = System.getenv("DB_URL");
+        if (env != null && !env.isBlank()) return env;
+        return readProp("db.url", "jdbc:mysql://localhost:3306/online_exam_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata");
+    }
+
+    private static String getUser() {
+        String env = System.getenv("DB_USER");
+        if (env != null && !env.isBlank()) return env;
+        return readProp("db.user", "exam_user");
+    }
+
+    private static String getPass() {
+        String env = System.getenv("DB_PASS");
+        if (env != null && !env.isBlank()) return env;
+        return readProp("db.pass", "exam123");
+    }
+
+    private static String readProp(String key, String def) {
+        java.io.File f = new java.io.File("db.properties");
+        if (f.exists()) {
+            try (java.io.FileInputStream fis = new java.io.FileInputStream(f)) {
+                java.util.Properties p = new java.util.Properties();
+                p.load(fis);
+                String val = p.getProperty(key);
+                if (val != null && !val.isBlank()) return val.trim();
+            } catch (Exception ignored) {}
+        }
+        return def;
     }
 
     public static Connection getConnection() throws SQLException {
@@ -25,7 +52,24 @@ public final class DBConnection {
         } catch (ClassNotFoundException e) {
             throw new SQLException("MySQL JDBC Driver not found.", e);
         }
-        return DriverManager.getConnection(URL, USER, PASS);
+        String url = getUrl();
+        String user = getUser();
+        String pass = getPass();
+        try {
+            return DriverManager.getConnection(url, user, pass);
+        } catch (SQLException ex) {
+            // Intelligent fallback for standard local MySQL root installations
+            if (url.contains("localhost") && !"root".equals(user)) {
+                try {
+                    return DriverManager.getConnection(url, "root", "root");
+                } catch (Exception ignored) {
+                    try {
+                        return DriverManager.getConnection(url, "root", "");
+                    } catch (Exception ignored2) {}
+                }
+            }
+            throw ex;
+        }
     }
 
     /**

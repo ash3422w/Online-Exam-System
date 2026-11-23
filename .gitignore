@@ -19,6 +19,7 @@ Thumbs.db
 .classpath
 
 # Package files except required dependencies in lib/
+*.jar
 *.war
 *.nar
 *.ear
