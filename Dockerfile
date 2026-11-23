@@ -1,28 +1,11 @@
-# ==========================================
-# Stage 1: Build Java Application from Source
-# ==========================================
-FROM openjdk:17-jdk-slim AS builder
-
-WORKDIR /build
-
-COPY ["java files", "/build/src/"]
-COPY lib/ /build/lib/
-
-RUN mkdir -p /build/out && \
-    find src/ -name "*.java" > sources.txt && \
-    javac -cp "lib/*" -d out @sources.txt && \
-    jar cfe OnlineExamSystem.jar com.onlineexam.main.Main -C out .
-
-# ==========================================
-# Stage 2: Runtime Environment (Render Cloud)
-# ==========================================
+# Single-stage Debian Bookworm image (fully supported and resolved by Docker Hub & Render)
 FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install OpenJDK 17, Xvfb virtual display, Openbox, x11vnc, noVNC web bridge, MariaDB, and fonts
+# Install OpenJDK 17 JDK, Xvfb virtual display, Openbox, x11vnc, noVNC web bridge, MariaDB, and fonts
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    openjdk-17-jre \
+    openjdk-17-jdk \
     xvfb \
     x11vnc \
     openbox \
@@ -38,15 +21,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Configure noVNC index.html to automatically connect and scale to user browser
-RUN ln -sf /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
-    sed -i 's/UI.initSetting("autoconnect", false);/UI.initSetting("autoconnect", true);/g' /usr/share/novnc/app/ui.js 2>/dev/null || true && \
-    sed -i 's/UI.initSetting("resize", "off");/UI.initSetting("resize", "scale");/g' /usr/share/novnc/app/ui.js 2>/dev/null || true
+# Set up automatic connect and resize redirect for noVNC
+RUN echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=vnc.html?autoconnect=true&resize=scale&reconnect=true"></head><body><p>Connecting to Online Examination System...</p></body></html>' > /usr/share/novnc/index.html
 
 WORKDIR /app
 
-# Copy compiled JAR from builder stage
-COPY --from=builder /build/OnlineExamSystem.jar /app/OnlineExamSystem.jar
+# Copy application JAR, dependencies, SQL scripts, and entrypoint
+COPY OnlineExamSystem.jar /app/OnlineExamSystem.jar
 COPY lib/ /app/lib/
 COPY sql/ /app/sql/
 COPY entrypoint.sh /app/entrypoint.sh
