@@ -1,39 +1,4 @@
-<!-- ============================================================ -->
-<!-- ONLINE EXAMINATION MANAGEMENT SYSTEM (OEMS) - GITHUB REPOSITORY -->
-<!-- ============================================================ -->
-
-<div align="center">
-
-<!-- ANIMATED 3D GRADIENT WAVING BANNER -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=4,12,24,30&height=260&section=header&text=ONLINE%20EXAMINATION%20SYSTEM&fontSize=40&fontColor=ffffff&animation=twinkling&desc=Enterprise%20Desktop%20CBT%20•%20Hardware%20Proctoring%20•%20Psychometrics&descSize=16&descAlignY=70" width="100%" alt="OEMS Header Banner" />
-
-<!-- ANIMATED DYNAMIC TYPING SVG -->
-<a href="https://github.com/ash3422w/Online-Exam-System">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=2600&pause=1000&color=6366F1&center=true&vCenter=true&width=750&lines=⚡+Zero-Latency+Java+Swing+%2B+FlatLaf+Desktop+Engine;🛡️+Hardware-Level+Window+Focus+%26+Webcam+Surveillance;🔐+Military-Grade+PBKDF2-HMAC-SHA256+Cryptography;📊+Real-Time+Classical+Test+Theory+(CTT)+Item+Analytics;📜+SHA-256+Tamper-Proof+PDF+Certificates+with+QR+Ledger;🚀+ACID+Two-Phase+Transactions+with+MySQL+8.0" alt="Animated Typing Features" />
-</a>
-
-<br/><br/>
-
-<!-- MODERN PILL BADGES ROW -->
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-17%2B%20%7C%2021%20LTS-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
-  <img src="https://img.shields.io/badge/MySQL-8.0%20InnoDB-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
-  <img src="https://img.shields.io/badge/GUI-FlatLaf%203.5-6366F1?style=for-the-badge&logo=java&logoColor=white" alt="FlatLaf" />
-  <img src="https://img.shields.io/badge/Security-PBKDF2--HMAC--SHA256-10B981?style=for-the-badge&logo=shield&logoColor=white" alt="Security" />
-  <img src="https://img.shields.io/badge/Architecture-MVC%20%7C%20DAO%20%7C%20Singleton-8B5CF6?style=for-the-badge&logo=blueprint&logoColor=white" alt="Architecture" />
-  <img src="https://img.shields.io/badge/License-MIT-0EA5E9?style=for-the-badge&logo=open-source-initiative&logoColor=white" alt="License" />
-</p>
-
-<!-- QUICK NAVIGATION -->
-<p align="center">
-  <a href="#-core-innovations">Core Innovations</a> •
-  <a href="#-project-directory-structure">Directory Structure</a> •
-  <a href="#-package-architecture-49-java-classes">Package Architecture</a> •
-  <a href="#-tech-stack--dependencies">Tech Stack</a> •
-  <a href="#-quick-start--run-guide">Quick Start</a>
-</p>
-
-</div>
+# Online Examination System
 
 ---
 
@@ -47,7 +12,7 @@
 - **JVM Window Focus Interceptor**: Real-time detection of OS window deactivations (`Alt + Tab`, Windows key, application switching) via `WindowFocusListener`.
 - **Global Keystroke Filtering**: Hooks `KeyboardFocusManager` to block cheating shortcuts (`Ctrl + C`, `Ctrl + V`, `Alt + F4`, function keys).
 - **Automated Webcam Surveillance**: Background daemon capturing periodic visual surveillance frames with dynamic threat index scoring.
-- **3-Strike Kiosk Termination**: Automated emergency submission triggering upon exceeding candidate violation thresholds.
+- **3-Strike Kiosk Termination**: Automatically terminates testing session and executes atomic submission upon exceeding candidate violation thresholds.
 
 </td>
 <td width="50%" valign="top">
@@ -132,7 +97,7 @@ Online-Exam-System/
 ├── tools/                                # Offscreen Screenshot Capture & Rendering Utilities
 ├── run.bat                               # Windows Command Prompt One-Click Launcher
 ├── run.ps1                               # Native PowerShell One-Click Launcher
-├── README.md                             # Project Showcase Documentation
+├── README.md                             # Project Documentation
 └── LICENSE                               # MIT Open Source License
 ```
 
@@ -190,12 +155,6 @@ Default Package
 
 ## 🛠️ Tech Stack & Dependencies
 
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=java,mysql,git,github,vscode,idea,eclipse" alt="Tech Stack Icons" />
-</div>
-
-<br/>
-
 | Layer | Component | Version | Purpose |
 |:---|:---|:---:|:---|
 | **Core Runtime** | **Java SE (OpenJDK)** | `17+ / 21 LTS` | Object-oriented application logic, multithreaded concurrency |
@@ -249,13 +208,6 @@ java -cp "out;lib/*" com.onlineexam.main.Main
 
 ---
 
-<div align="center">
-
-<!-- ANIMATED FOOTER WAVE -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=4,12,24,30&height=120&section=footer" width="100%" alt="Footer Banner" />
-
 <p align="center">
-  <sub>Engineered with ❤️ in Core Java & MySQL • Released under the MIT License</sub>
+  <sub>Engineered in Core Java & MySQL • Released under the MIT License</sub>
 </p>
-
-</div>
