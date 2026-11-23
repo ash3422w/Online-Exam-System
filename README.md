@@ -108,7 +108,7 @@
 
 ```
 Online-Exam-System/
-├── src/                                  # All 49 Java source files organized into canonical packages
+├── java files/                           # All 49 Java source files organized into canonical packages
 │   ├── com/onlineexam/
 │   │   ├── main/                         # Bootstrap & Application Lifecycle (Main.java)
 │   │   ├── dao/                          # Database Access, PBKDF2 Hashing, Sessions, & CTT (12 classes)
@@ -237,8 +237,8 @@ run.bat
 
 #### Manual Compilation & Launch:
 ```powershell
-# Compile all source files from src/ into out/ directory
-javac -cp "lib/*" -d out (Get-ChildItem -Path src -Filter *.java -Recurse | Select-Object -ExpandProperty FullName)
+# Compile all source files from java files/ into out/ directory
+javac -cp "lib/*" -d out (Get-ChildItem -Path "java files" -Filter *.java -Recurse | Select-Object -ExpandProperty FullName)
 
 # Verify database connection
 java -cp "out;lib/*" TestDB

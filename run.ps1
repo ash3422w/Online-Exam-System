@@ -6,8 +6,8 @@ if (-not (Test-Path "out")) {
     New-Item -ItemType Directory -Path "out" | Out-Null
 }
 
-Write-Host "Compiling Java source files from src\..." -ForegroundColor Cyan
-$sources = Get-ChildItem -Path src -Filter *.java -Recurse | Select-Object -ExpandProperty FullName
+Write-Host "Compiling Java source files from java files\..." -ForegroundColor Cyan
+$sources = Get-ChildItem -Path "java files" -Filter *.java -Recurse | Select-Object -ExpandProperty FullName
 javac -cp "$cpLibs" -d out $sources
 
 if ($LASTEXITCODE -ne 0) {

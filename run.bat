@@ -6,8 +6,8 @@ set "CP_LIBS=lib\*"
 
 if not exist "out" mkdir out
 
-echo Compiling Java source files from src\...
-dir /s /b src\*.java > "%TEMP%\oems_sources.txt"
+echo Compiling Java source files from java files\...
+dir /s /b "java files\*.java" > "%TEMP%\oems_sources.txt"
 javac -cp "%CP_LIBS%" -d out @"%TEMP%\oems_sources.txt"
 set "COMPILE_STATUS=%ERRORLEVEL%"
 del "%TEMP%\oems_sources.txt" 2>nul
