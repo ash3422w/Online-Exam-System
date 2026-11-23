@@ -3,9 +3,9 @@ FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install OpenJDK 17 JDK, Xvfb virtual display, Openbox, x11vnc, noVNC web bridge, MariaDB, and fonts
+# Install OpenJDK 17, Xvfb virtual display, Openbox, x11vnc, noVNC web bridge, MariaDB, and fonts
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    openjdk-17-jdk \
+    openjdk-17-jre \
     xvfb \
     x11vnc \
     openbox \
@@ -26,19 +26,11 @@ RUN echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=
 
 WORKDIR /app
 
-# Copy application files and source code
+# Copy application files (OnlineExamSystem.jar is pre-compiled with Java 17 / bytecode version 61.0)
 COPY OnlineExamSystem.jar /app/OnlineExamSystem.jar
-COPY ["java files", "/app/java files/"]
 COPY lib/ /app/lib/
 COPY sql/ /app/sql/
 COPY entrypoint.sh /app/entrypoint.sh
-
-# Ensure the JAR is compiled natively with Java 17 bytecode (version 61.0) inside Debian
-RUN mkdir -p /app/out && \
-    find "/app/java files" -name "*.java" > /app/sources.txt && \
-    javac -cp "/app/lib/*" -d /app/out @/app/sources.txt && \
-    jar cfe /app/OnlineExamSystem.jar com.onlineexam.main.Main -C /app/out . && \
-    rm -rf /app/sources.txt /app/out "/app/java files"
 
 RUN chmod +x /app/entrypoint.sh
 
