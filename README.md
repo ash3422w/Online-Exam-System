@@ -1,4 +1,10 @@
-# Online Examination System
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=4,12,24,30&height=220&section=header&text=Online%20Examination%20System&fontSize=42&fontColor=ffffff&animation=twinkling" width="100%" alt="Online Examination System" />
+
+# 🎓 Online Examination System
+
+</div>
 
 ---
 
