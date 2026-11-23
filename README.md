@@ -94,11 +94,6 @@ Online-Exam-System/
 │   ├── database_setup.sql                # 8 Normalized InnoDB Tables & Foreign Keys
 │   └── sample_data.sql                   # Default Admin/Student Accounts & 100 Sample MCQs
 │
-├── docs/                                 # Project Documentation & Reports
-│   ├── Online_Exam_System_Java_Project_Report.docx # Word Report (1.50 MB, Times New Roman, Pure Black)
-│   ├── Java_Project_Report_Pagewise.md   # Complete Academic Markdown Report
-│   └── archive/                          # Historical Revisions & Drafts Archive
-│
 ├── lib/                                  # Pre-Packaged Runtime Dependencies (FlatLaf, MySQL, OpenPDF, Webcam)
 ├── tools/                                # Offscreen Screenshot Capture & Rendering Utilities
 ├── run.bat                               # Windows Command Prompt One-Click Launcher
