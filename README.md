@@ -237,6 +237,21 @@ java -cp "out;lib/*" com.onlineexam.main.Main
 
 ---
 
+## ☁️ Cloud Web Deployment (Render.com)
+
+The project includes a ready-to-deploy **Docker + noVNC** configuration that streams the interactive Java Swing application directly to any web browser.
+
+### 1-Click Setup on Render:
+1. Fork or push this repository to GitHub.
+2. Sign in to [Render.com](https://render.com) and click **New +** ➔ **Web Service**.
+3. Select your repository `Online-Exam-System`.
+4. Render will automatically detect `render.yaml` and select the **Docker** runtime.
+5. Click **Deploy Web Service**.
+
+Render will build the container, start the MariaDB database and virtual display (`Xvfb`), and provide a live public link (e.g., `https://online-exam-system-xxxx.onrender.com`) where the full application can be interacted with inside the browser without installing Java or MySQL locally.
+
+---
+
 <p align="center">
   <sub>Engineered in Core Java & MySQL • Released under the MIT License</sub>
 </p>
