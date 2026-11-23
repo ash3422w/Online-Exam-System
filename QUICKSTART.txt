@@ -1,5 +1,5 @@
 ========================================================================
-ONLINE EXAMINATION MANAGEMENT SYSTEM (OEMS) - RELEASE v1.0.0
+ONLINE EXAMINATION MANAGEMENT SYSTEM (OEMS) - RELEASE v1.1.0
 ========================================================================
 
 QUICK START INSTRUCTIONS:
