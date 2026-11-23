@@ -223,32 +223,55 @@ public class SignupUI extends JFrame {
                 return;
             }
 
-            UserDAO.SignupStatus status = UserDAO.registerUser(username, password, "student", fullName);
-            if (status == UserDAO.SignupStatus.USER_EXISTS) {
-                userField.flashError();
-                validationLabel.showError("That User ID is already taken.");
-                AuthComponents.shakeCard(card);
-                return;
-            }
-            if (status != UserDAO.SignupStatus.SUCCESS) {
-                validationLabel.showError("Database error. Check MySQL connection.");
-                AuthComponents.shakeCard(card);
-                return;
-            }
-
-            transitioning = true;
             createBtn.setEnabled(false);
-            validationLabel.showSuccess("Account created! Redirecting to Sign In...");
+            createBtn.setText("Creating account...");
 
-            Timer delay = new Timer(520, ev -> {
-                ((Timer) ev.getSource()).stop();
-                AuthComponents.scaleFadeOut(card, () -> {
-                    dispose();
-                    new LoginUI();
-                });
-            });
-            delay.setRepeats(false);
-            delay.start();
+            new SwingWorker<UserDAO.SignupStatus, Void>() {
+                @Override
+                protected UserDAO.SignupStatus doInBackground() {
+                    return UserDAO.registerUser(username, password, "student", fullName);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        UserDAO.SignupStatus status = get();
+                        if (status == UserDAO.SignupStatus.USER_EXISTS) {
+                            createBtn.setEnabled(true);
+                            createBtn.setText("Create Account \u2192");
+                            userField.flashError();
+                            validationLabel.showError("That User ID is already taken.");
+                            AuthComponents.shakeCard(card);
+                            return;
+                        }
+                        if (status != UserDAO.SignupStatus.SUCCESS) {
+                            createBtn.setEnabled(true);
+                            createBtn.setText("Create Account \u2192");
+                            validationLabel.showError("Database error. Check MySQL connection.");
+                            AuthComponents.shakeCard(card);
+                            return;
+                        }
+
+                        transitioning = true;
+                        validationLabel.showSuccess("Account created! Redirecting to Sign In...");
+
+                        Timer delay = new Timer(520, ev -> {
+                            ((Timer) ev.getSource()).stop();
+                            AuthComponents.scaleFadeOut(card, () -> {
+                                dispose();
+                                new LoginUI();
+                            });
+                        });
+                        delay.setRepeats(false);
+                        delay.start();
+                    } catch (Exception ex) {
+                        createBtn.setEnabled(true);
+                        createBtn.setText("Create Account \u2192");
+                        validationLabel.showError("Database error: " + ex.getMessage());
+                        AuthComponents.shakeCard(card);
+                    }
+                }
+            }.execute();
         };
 
         createBtn.addActionListener(e -> doRegister.run());

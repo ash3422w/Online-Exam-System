@@ -34,6 +34,11 @@ public final class WebcamProctorService {
     public static final float JPEG_QUALITY = 0.60f;
     private static final Random RANDOM = new Random();
 
+    private static volatile long lastCameraCheckNanos = 0L;
+    private static volatile boolean cachedCameraDetected = false;
+    private static volatile String cachedCameraName = null;
+    private static final long CAMERA_CACHE_NANOS = 15_000_000_000L; // 15 seconds
+
     private WebcamProctorService() {
     }
 
@@ -49,30 +54,47 @@ public final class WebcamProctorService {
         }
     }
 
+    private static synchronized void refreshCameraCacheIfExpired() {
+        long now = System.nanoTime();
+        if (lastCameraCheckNanos != 0L && (now - lastCameraCheckNanos) < CAMERA_CACHE_NANOS) {
+            return;
+        }
+        if (!isAvailable()) {
+            cachedCameraDetected = false;
+            cachedCameraName = null;
+            lastCameraCheckNanos = now;
+            return;
+        }
+        try {
+            Webcam webcam = Webcam.getDefault();
+            if (webcam != null) {
+                cachedCameraDetected = true;
+                cachedCameraName = webcam.getName();
+            } else {
+                cachedCameraDetected = false;
+                cachedCameraName = null;
+            }
+        } catch (Throwable t) {
+            cachedCameraDetected = false;
+            cachedCameraName = null;
+        }
+        lastCameraCheckNanos = now;
+    }
+
     /**
      * Checks whether an active physical webcam is detected on the machine.
      */
     public static boolean isCameraDetected() {
-        if (!isAvailable()) return false;
-        try {
-            List<Webcam> webcams = Webcam.getWebcams();
-            return webcams != null && !webcams.isEmpty();
-        } catch (Throwable t) {
-            return false;
-        }
+        refreshCameraCacheIfExpired();
+        return cachedCameraDetected;
     }
 
     /**
      * Returns the name of the default webcam, or null if none.
      */
     public static String getCameraName() {
-        if (!isAvailable()) return null;
-        try {
-            Webcam webcam = Webcam.getDefault();
-            return webcam != null ? webcam.getName() : null;
-        } catch (Throwable t) {
-            return null;
-        }
+        refreshCameraCacheIfExpired();
+        return cachedCameraName;
     }
 
     /**

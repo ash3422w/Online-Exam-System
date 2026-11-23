@@ -17,6 +17,18 @@ public class LoginUI extends JFrame {
     private String selectedRole = "student";
     private boolean transitioning = false;
 
+    private static class LoginTaskResult {
+        final boolean success;
+        final String token;
+        final String errorMessage;
+
+        LoginTaskResult(boolean success, String token, String errorMessage) {
+            this.success = success;
+            this.token = token;
+            this.errorMessage = errorMessage;
+        }
+    }
+
     public LoginUI() {
         setTitle("Online Examination Management System - Sign In");
         setSize(940, 600);
@@ -295,75 +307,69 @@ public class LoginUI extends JFrame {
                 return;
             }
 
-            boolean valid = UserDAO.validateUser(username, password, role);
+            loginBtn.setEnabled(false);
+            loginBtn.setText("Signing in...");
+            final String machineInfo = SessionDAO.buildLocalMachineInfo();
 
-            if (!valid) {
-                userField.flashError();
-                passField.flashError();
-                errorLabel.showError("Invalid credentials or role mismatch.");
-                AuthComponents.shakeCard(card);
-                return;
-            }
-
-            // Students only: enforce single-session & in-exam device lock
-            if (!"admin".equals(role)) {
-                loginBtn.setEnabled(false);
-                loginBtn.setText("Signing in...");
-                final String machineInfo = SessionDAO.buildLocalMachineInfo();
-
-                new SwingWorker<SessionDAO.LoginResult, Void>() {
-                    @Override
-                    protected SessionDAO.LoginResult doInBackground() {
-                        return SessionDAO.tryLogin(username, machineInfo);
+            new SwingWorker<LoginTaskResult, Void>() {
+                @Override
+                protected LoginTaskResult doInBackground() {
+                    boolean valid = UserDAO.validateUser(username, password, role);
+                    if (!valid) {
+                        return new LoginTaskResult(false, null, "Invalid credentials or role mismatch.");
                     }
+                    if ("admin".equals(role)) {
+                        return new LoginTaskResult(true, null, null);
+                    }
+                    // Students only: enforce single-session & in-exam device lock
+                    SessionDAO.LoginResult sRes = SessionDAO.tryLogin(username, machineInfo);
+                    if (sRes == null || !sRes.isOk()) {
+                        String msg = (sRes != null && sRes.message != null)
+                                ? sRes.message : "Sign in failed. Please check your connection.";
+                        return new LoginTaskResult(false, null, msg);
+                    }
+                    return new LoginTaskResult(true, sRes.token, null);
+                }
 
-                    @Override
-                    protected void done() {
-                        try {
-                            SessionDAO.LoginResult res = get();
-                            if (res == null || !res.isOk()) {
-                                loginBtn.setEnabled(true);
-                                loginBtn.setText("Sign In");
-                                String msg = (res != null && res.message != null)
-                                        ? res.message : "Sign in failed. Please check your connection.";
-                                userField.flashError();
-                                passField.flashError();
-                                errorLabel.showError(msg);
-                                AuthComponents.shakeCard(card);
-                                return;
-                            }
+                @Override
+                protected void done() {
+                    try {
+                        LoginTaskResult res = get();
+                        if (res == null || !res.success) {
+                            loginBtn.setEnabled(true);
+                            loginBtn.setText("Sign In");
+                            userField.flashError();
+                            passField.flashError();
+                            errorLabel.showError(res != null && res.errorMessage != null
+                                    ? res.errorMessage : "Sign in failed.");
+                            AuthComponents.shakeCard(card);
+                            return;
+                        }
 
-                            // Claimed token successfully -> start heartbeat & proceed
-                            transitioning = true;
-                            ExamStore.startSession(username, role);
+                        transitioning = true;
+                        ExamStore.startSession(username, role);
+
+                        if (!"admin".equals(role)) {
                             ExamStore.setSessionToken(res.token);
                             SessionHeartbeat.start(username, res.token);
-
                             AuthComponents.scaleFadeOut(card, () -> {
                                 dispose();
                                 new StudentDashboard();
                             });
-                        } catch (Exception ex) {
-                            loginBtn.setEnabled(true);
-                            loginBtn.setText("Sign In");
-                            errorLabel.showError("Connection error: " + ex.getMessage());
-                            AuthComponents.shakeCard(card);
+                        } else {
+                            AuthComponents.scaleFadeOut(card, () -> {
+                                dispose();
+                                new AdminDashboard();
+                            });
                         }
+                    } catch (Exception ex) {
+                        loginBtn.setEnabled(true);
+                        loginBtn.setText("Sign In");
+                        errorLabel.showError("Connection error: " + ex.getMessage());
+                        AuthComponents.shakeCard(card);
                     }
-                }.execute();
-                return;
-            }
-
-            // Admins are exempt from session locking
-            transitioning = true;
-            loginBtn.setEnabled(false);
-            ExamStore.startSession(username, role);
-
-            // Successful login: card scales up and fades out, then opens the dashboard
-            AuthComponents.scaleFadeOut(card, () -> {
-                dispose();
-                new AdminDashboard();
-            });
+                }
+            }.execute();
         };
 
         loginBtn.addActionListener(e -> doLogin.run());

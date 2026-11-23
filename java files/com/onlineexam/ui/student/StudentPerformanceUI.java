@@ -270,16 +270,74 @@ public class StudentPerformanceUI extends JFrame {
         return card;
     }
 
+    private static class PerformancePayload {
+        final AttemptDAO.StudentPerformanceSummary summary;
+        final List<AttemptDAO.AttemptDetail> attempts;
+        final Map<String, Double> strengths;
+        final String subjectLabel;
+        final boolean showToast;
+
+        PerformancePayload(
+                AttemptDAO.StudentPerformanceSummary summary,
+                List<AttemptDAO.AttemptDetail> attempts,
+                Map<String, Double> strengths,
+                String subjectLabel,
+                boolean showToast) {
+            this.summary = summary;
+            this.attempts = attempts;
+            this.strengths = strengths;
+            this.subjectLabel = subjectLabel;
+            this.showToast = showToast;
+        }
+    }
+
     private void loadStudentPerformance(boolean showToast) {
         String currentUser = ExamStore.getCurrentUserId();
         SubjectOption selected = (SubjectOption) subjectFilterBox.getSelectedItem();
         Integer subjectId = selected == null ? null : selected.subjectId;
         String subjectLabel = selected == null ? "All Subjects" : selected.name;
 
-        AttemptDAO.StudentPerformanceSummary summary =
-                AttemptDAO.getStudentPerformanceSummary(currentUser, subjectId);
-        List<AttemptDAO.AttemptDetail> attempts =
-                AttemptDAO.getAttemptDetails(subjectId, currentUser, false);
+        new SwingWorker<PerformancePayload, Void>() {
+            @Override
+            protected PerformancePayload doInBackground() {
+                AttemptDAO.StudentPerformanceSummary summary =
+                        AttemptDAO.getStudentPerformanceSummary(currentUser, subjectId);
+                List<AttemptDAO.AttemptDetail> attempts =
+                        AttemptDAO.getAttemptDetails(subjectId, currentUser, false);
+
+                Map<String, Double> strengths = new LinkedHashMap<>();
+                for (Map.Entry<Integer, String> entry : AttemptDAO.getAvailableSubjects().entrySet()) {
+                    List<AttemptDAO.AttemptDetail> subAttempts =
+                            AttemptDAO.getAttemptDetails(entry.getKey(), currentUser, false);
+                    if (!subAttempts.isEmpty()) {
+                        double sum = 0.0;
+                        for (AttemptDAO.AttemptDetail d : subAttempts) sum += d.percentage;
+                        strengths.put(entry.getValue(), AttemptDAO.roundTwoDecimals(sum / subAttempts.size()));
+                    } else {
+                        strengths.put(entry.getValue(), 0.0);
+                    }
+                }
+                return new PerformancePayload(summary, attempts, strengths, subjectLabel, showToast);
+            }
+
+            @Override
+            protected void done() {
+                if (!isDisplayable()) return;
+                try {
+                    PerformancePayload p = get();
+                    if (p != null) {
+                        applyPerformancePayload(p);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }.execute();
+    }
+
+    private void applyPerformancePayload(PerformancePayload p) {
+        AttemptDAO.StudentPerformanceSummary summary = p.summary;
+        List<AttemptDAO.AttemptDetail> attempts = p.attempts;
 
         if (!summary.hasAttempts || attempts.isEmpty()) {
             totalExamsValue.setText("0");
@@ -314,25 +372,11 @@ public class StudentPerformanceUI extends JFrame {
             trendChart.setData(xLabels, yValues);
         }
 
-        // Populate RadarChartPanel with per-subject average strengths for this student
-        Map<String, Double> strengths = new LinkedHashMap<>();
-        for (Map.Entry<Integer, String> entry : AttemptDAO.getAvailableSubjects().entrySet()) {
-            List<AttemptDAO.AttemptDetail> subAttempts =
-                    AttemptDAO.getAttemptDetails(entry.getKey(), currentUser, false);
-            if (!subAttempts.isEmpty()) {
-                double sum = 0.0;
-                for (AttemptDAO.AttemptDetail d : subAttempts) sum += d.percentage;
-                strengths.put(entry.getValue(), AttemptDAO.roundTwoDecimals(sum / subAttempts.size()));
-            } else {
-                strengths.put(entry.getValue(), 0.0);
-            }
-        }
-        radarChart.setData(strengths);
+        radarChart.setData(p.strengths);
+        renderHistoryTable(attempts, p.subjectLabel);
 
-        renderHistoryTable(attempts, subjectLabel);
-
-        if (showToast) {
-            UITheme.showToast(this, "History Updated", "Synced latest attempts for " + subjectLabel + ".", UITheme.ToastType.SUCCESS);
+        if (p.showToast) {
+            UITheme.showToast(this, "History Updated", "Synced latest attempts for " + p.subjectLabel + ".", UITheme.ToastType.SUCCESS);
         }
     }
 

@@ -1,5 +1,9 @@
 package com.onlineexam.dao;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,12 +11,46 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public final class DBConnection {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final int MAX_POOL_SIZE = 10;
+    private static final ConcurrentLinkedQueue<Connection> POOL = new ConcurrentLinkedQueue<>();
+    private static volatile boolean shutdownHookInstalled = false;
+
+    static {
+        // Pre-warm database connection asynchronously at class loading to eliminate cold-start delay
+        Thread prewarm = new Thread(() -> {
+            try {
+                Connection c = createPhysicalConnection();
+                if (c != null) {
+                    POOL.offer(c);
+                }
+            } catch (Throwable ignored) {}
+        }, "DBConnection-Prewarm");
+        prewarm.setDaemon(true);
+        prewarm.start();
+
+        installPoolShutdownHook();
+    }
 
     private DBConnection() {
+    }
+
+    private static synchronized void installPoolShutdownHook() {
+        if (!shutdownHookInstalled) {
+            shutdownHookInstalled = true;
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                Connection c;
+                while ((c = POOL.poll()) != null) {
+                    try {
+                        c.close();
+                    } catch (Exception ignored) {}
+                }
+            }, "DBConnection-Pool-Cleanup"));
+        }
     }
 
     private static String getUrl() {
@@ -46,7 +84,7 @@ public final class DBConnection {
         return def;
     }
 
-    public static Connection getConnection() throws SQLException {
+    private static Connection createPhysicalConnection() throws SQLException {
         try {
             Class.forName(DRIVER);
         } catch (ClassNotFoundException e) {
@@ -70,6 +108,68 @@ public final class DBConnection {
             }
             throw ex;
         }
+    }
+
+    /**
+     * Obtains a high-performance pooled database connection.
+     * When closed via try-with-resources or con.close(), the connection is reset and
+     * returned to the pool without closing the underlying TCP socket.
+     */
+    public static Connection getConnection() throws SQLException {
+        Connection real = POOL.poll();
+        while (real != null) {
+            try {
+                if (!real.isClosed() && real.isValid(1)) {
+                    break;
+                }
+                real.close();
+            } catch (Exception ignored) {}
+            real = POOL.poll();
+        }
+
+        if (real == null) {
+            real = createPhysicalConnection();
+        }
+
+        final Connection finalReal = real;
+        return (Connection) Proxy.newProxyInstance(
+                Connection.class.getClassLoader(),
+                new Class<?>[]{Connection.class},
+                new InvocationHandler() {
+                    private boolean closed = false;
+
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        String name = method.getName();
+                        if ("close".equals(name)) {
+                            if (!closed) {
+                                closed = true;
+                                try {
+                                    if (!finalReal.isClosed()) {
+                                        if (!finalReal.getAutoCommit()) {
+                                            finalReal.setAutoCommit(true);
+                                        }
+                                        if (POOL.size() < MAX_POOL_SIZE) {
+                                            POOL.offer(finalReal);
+                                            return null;
+                                        }
+                                    }
+                                } catch (Exception ignored) {}
+                                finalReal.close();
+                            }
+                            return null;
+                        }
+                        if ("isClosed".equals(name)) {
+                            return closed || finalReal.isClosed();
+                        }
+                        try {
+                            return method.invoke(finalReal, args);
+                        } catch (InvocationTargetException ite) {
+                            throw ite.getCause();
+                        }
+                    }
+                }
+        );
     }
 
     /**

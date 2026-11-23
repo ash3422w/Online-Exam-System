@@ -34,6 +34,9 @@ public class InstructionsUI extends JFrame {
             }
         }
         this.activeConfig = cfg;
+        if (cfg != null && cfg.requireWebcam) {
+            new Thread(WebcamProctorService::isCameraDetected, "Webcam-Prewarm").start();
+        }
 
         String subjectName = (cfg != null && cfg.subjectName != null)
                 ? cfg.subjectName : ExamStore.getSubjectName(subjectId);

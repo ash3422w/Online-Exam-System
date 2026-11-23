@@ -20,8 +20,16 @@ public class Main {
 
         // Start UI
         SwingUtilities.invokeLater(() -> {
-            UITheme.initGlobalLookAndFeel();
-            new LoginUI();
+            try {
+                System.out.println("[Main] Initializing UITheme...");
+                UITheme.initGlobalLookAndFeel();
+                System.out.println("[Main] Creating LoginUI...");
+                new LoginUI();
+                System.out.println("[Main] LoginUI created and visible!");
+            } catch (Throwable t) {
+                System.err.println("[Main] FATAL UI INITIALIZATION EXCEPTION:");
+                t.printStackTrace();
+            }
         });
     }
 }

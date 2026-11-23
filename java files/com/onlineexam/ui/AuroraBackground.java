@@ -26,7 +26,7 @@ public class AuroraBackground extends JPanel {
     public static final Color BLOB_PINK = new Color(251, 207, 232);       // #FBCFE8
     public static final Color BLOB_LAVENDER = new Color(221, 214, 254);   // #DDD6FE
 
-    private static final int FPS_DELAY_MS = 33; // ~30 FPS
+    private static final int FPS_DELAY_MS = 42; // ~24 FPS smooth organic motion
     private static final int PARTICLE_COUNT = 30;
     private static final int BLOB_SPRITE_SIZE = 256;
 
@@ -177,6 +177,10 @@ public class AuroraBackground extends JPanel {
         if (!isShowing()) {
             animTimer.stop();
             return;
+        }
+        Window win = SwingUtilities.getWindowAncestor(this);
+        if (win instanceof Frame && (((Frame) win).getExtendedState() & Frame.ICONIFIED) != 0) {
+            return; // Minimized: pause background rendering to save CPU
         }
         long now = System.nanoTime();
         double dt = (lastTickNanos == 0L) ? (FPS_DELAY_MS / 1000.0) : ((now - lastTickNanos) / 1_000_000_000.0);
