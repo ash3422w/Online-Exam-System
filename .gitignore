@@ -27,8 +27,13 @@ Thumbs.db
 *.tar.gz
 *.rar
 !lib/*.jar
+!OnlineExamSystem.jar
 
 # Local database storage
 mysql_data/
+
+# Environment and configuration files with credentials
+.env
+db.properties
 
 

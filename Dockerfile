@@ -1,4 +1,21 @@
-# Multi-stage / lightweight Debian base for Render cloud deployment
+# ==========================================
+# Stage 1: Build Java Application from Source
+# ==========================================
+FROM openjdk:17-jdk-slim AS builder
+
+WORKDIR /build
+
+COPY ["java files", "/build/src/"]
+COPY lib/ /build/lib/
+
+RUN mkdir -p /build/out && \
+    find src/ -name "*.java" > sources.txt && \
+    javac -cp "lib/*" -d out @sources.txt && \
+    jar cfe OnlineExamSystem.jar com.onlineexam.main.Main -C out .
+
+# ==========================================
+# Stage 2: Runtime Environment (Render Cloud)
+# ==========================================
 FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -28,8 +45,8 @@ RUN ln -sf /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
 
 WORKDIR /app
 
-# Copy application files
-COPY OnlineExamSystem.jar /app/
+# Copy compiled JAR from builder stage
+COPY --from=builder /build/OnlineExamSystem.jar /app/OnlineExamSystem.jar
 COPY lib/ /app/lib/
 COPY sql/ /app/sql/
 COPY entrypoint.sh /app/entrypoint.sh
