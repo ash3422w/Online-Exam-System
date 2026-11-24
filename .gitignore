@@ -36,4 +36,12 @@ mysql_data/
 .env
 db.properties
 
+# Personal presentation scripts and video recordings (not pushed to git)
+*Video_Script*
+*video_script*
+*presentation_script*
+*Presentation_Script*
+video_script/
+scripts_personal/
+
 
