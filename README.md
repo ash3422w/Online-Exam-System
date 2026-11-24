@@ -109,6 +109,8 @@ Online-Exam-System/
 │   ├── database_setup.sql                # 8 Normalized InnoDB Tables & Foreign Keys
 │   └── sample_data.sql                   # Default Admin/Student Accounts & 100 Sample MCQs
 │
+├── docs/                                 # Project Report & Academic Publication (PDF)
+│   └── Online Examination Management System (OEMS) - Java Project Report.pdf
 ├── lib/                                  # Pre-Packaged Runtime Dependencies (FlatLaf, MySQL, OpenPDF, Webcam)
 ├── tools/                                # Offscreen Screenshot Capture & Rendering Utilities
 ├── run.bat                               # Windows Command Prompt One-Click Launcher
