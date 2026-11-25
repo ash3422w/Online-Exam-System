@@ -16,6 +16,7 @@ public class SignupUI extends JFrame {
         setSize(940, 640);
         setMinimumSize(new Dimension(840, 580));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Full-window animated Pastel Aurora Light background

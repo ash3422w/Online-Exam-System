@@ -34,6 +34,7 @@ public class LoginUI extends JFrame {
         setSize(940, 600);
         setMinimumSize(new Dimension(840, 550));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Full-window animated Pastel Aurora Light background

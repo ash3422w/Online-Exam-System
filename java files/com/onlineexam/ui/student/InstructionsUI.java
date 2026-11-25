@@ -55,6 +55,7 @@ public class InstructionsUI extends JFrame {
         setSize(960, 700);
         setMinimumSize(new Dimension(800, 610));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         AuroraBackground root = new AuroraBackground(new BorderLayout());

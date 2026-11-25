@@ -34,6 +34,7 @@ public class VerifyCertificateUI extends JFrame {
         setSize(640, 600);
         setMinimumSize(new Dimension(540, 520));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         AuroraBackground root = new AuroraBackground(new BorderLayout(0, 16));

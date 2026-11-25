@@ -60,6 +60,7 @@ public class ExamManagementUI extends JFrame {
         setSize(1160, 700);
         setMinimumSize(new Dimension(960, 580));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         AuroraBackground root = new AuroraBackground(new BorderLayout());

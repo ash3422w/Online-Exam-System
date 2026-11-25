@@ -74,6 +74,7 @@ public class SubjectSelectionUI extends JFrame {
         setSize(1020, 690);
         setMinimumSize(new Dimension(800, 560));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         AuroraBackground root = new AuroraBackground(new BorderLayout());

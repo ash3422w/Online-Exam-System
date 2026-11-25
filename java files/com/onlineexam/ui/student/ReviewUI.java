@@ -123,6 +123,7 @@ public class ReviewUI extends JFrame {
         setSize(980, 710);
         setMinimumSize(new Dimension(800, 560));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         AuroraBackground root = new AuroraBackground(new BorderLayout());

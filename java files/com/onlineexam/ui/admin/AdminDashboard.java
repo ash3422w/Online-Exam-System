@@ -51,6 +51,7 @@ public class AdminDashboard extends JFrame {
         setSize(1220, 760);
         setMinimumSize(new Dimension(1020, 650));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         if (ExamStore.getQuestionCount() == 0) {

@@ -105,6 +105,7 @@ public class ProctorLogUI extends JFrame {
         setSize(1240, 790);
         setMinimumSize(new Dimension(1020, 660));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         AuroraBackground root = new AuroraBackground(new BorderLayout());

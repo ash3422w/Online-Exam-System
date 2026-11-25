@@ -49,6 +49,7 @@ public class PerformanceAnalysisUI extends JFrame {
         setSize(1160, 780);
         setMinimumSize(new Dimension(960, 660));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         AuroraBackground root = new AuroraBackground(new BorderLayout());

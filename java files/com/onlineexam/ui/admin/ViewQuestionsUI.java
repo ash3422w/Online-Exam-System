@@ -41,6 +41,7 @@ public class ViewQuestionsUI extends JFrame {
         setSize(980, 680);
         setMinimumSize(new Dimension(820, 560));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         QuestionDAO.loadQuestionsFromDB();

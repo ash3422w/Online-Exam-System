@@ -67,6 +67,7 @@ public class AddQuestionUI extends JFrame {
         setSize(830, 840);
         setMinimumSize(new Dimension(720, 680));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         AuroraBackground root = new AuroraBackground(new BorderLayout());

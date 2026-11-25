@@ -70,6 +70,7 @@ public class ResultUI extends JFrame {
         setSize(940, 710);
         setMinimumSize(new Dimension(800, 620));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         addWindowListener(new WindowAdapter() {

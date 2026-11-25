@@ -49,6 +49,7 @@ public class StudentPerformanceUI extends JFrame {
         setSize(1120, 770);
         setMinimumSize(new Dimension(920, 640));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         AuroraBackground root = new AuroraBackground(new BorderLayout());

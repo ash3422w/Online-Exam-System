@@ -120,6 +120,7 @@ public class StudentDashboard extends JFrame {
         setSize(1220, 760);
         setMinimumSize(new Dimension(1020, 660));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Full-window animated Pastel Aurora Light mesh-gradient background

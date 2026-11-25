@@ -29,6 +29,7 @@ public class DemoFrame extends JFrame {
         setSize(980, 680);
         setMinimumSize(new Dimension(860, 600));
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Animated Pastel Aurora Light mesh-gradient background

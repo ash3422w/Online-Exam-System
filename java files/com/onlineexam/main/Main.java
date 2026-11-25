@@ -21,6 +21,14 @@ public class Main {
         // Start UI
         SwingUtilities.invokeLater(() -> {
             try {
+                // By default maximize every window of the application when displayed
+                java.awt.Toolkit.getDefaultToolkit().addAWTEventListener(event -> {
+                    if (event.getID() == java.awt.event.WindowEvent.WINDOW_OPENED && event.getSource() instanceof javax.swing.JFrame) {
+                        javax.swing.JFrame frame = (javax.swing.JFrame) event.getSource();
+                        frame.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+                    }
+                }, java.awt.AWTEvent.WINDOW_EVENT_MASK);
+
                 System.out.println("[Main] Initializing UITheme...");
                 UITheme.initGlobalLookAndFeel();
                 System.out.println("[Main] Creating LoginUI...");
