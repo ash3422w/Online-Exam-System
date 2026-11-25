@@ -1,0 +1,7 @@
+Online Examination Management System (OEMS) - Video Presentation Link:
+
+https://drive.google.com/file/d/1OsGQHxEmHiaKSQwqbjMwYxkCB3dn8TfZ/view?usp=sharing
+
+Access: Public (Anyone with the link can view)
+Format: Video Presentation Walkthrough
+Project: Online Examination System (Java & MySQL)

@@ -135,6 +135,10 @@ Online-Exam-System/
 │
 ├── docs/                                 # Project Report & Academic Publication (PDF)
 │   └── Online Examination Management System (OEMS) - Java Project Report.pdf
+├── presentation/                         # Video Presentation Walkthrough & Direct Stream Links
+│   ├── README.md                         # Presentation Overview, Speaker Breakdown & Timelines
+│   ├── presentation.url                  # Windows Internet Shortcut (Double-click to open video)
+│   └── VIDEO_LINK.txt                    # Plain Text Stream URL
 ├── lib/                                  # Pre-Packaged Runtime Dependencies (FlatLaf, MySQL, OpenPDF, Webcam)
 ├── tools/                                # Offscreen Screenshot Capture & Rendering Utilities
 ├── run.bat                               # Windows Command Prompt One-Click Launcher
