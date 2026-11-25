@@ -11,9 +11,6 @@
   <a href="https://github.com/ash3422w/Online-Exam-System/releases/download/v1.1.0/OnlineExamSystem-v1.1.0-Windows.zip">
     <img src="https://img.shields.io/badge/Download-Standalone%20App%20(ZIP)-10b981?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows Release" />
   </a>
-  <a href="https://drive.google.com/file/d/1OsGQHxEmHiaKSQwqbjMwYxkCB3dn8TfZ/view?usp=sharing">
-    <img src="https://img.shields.io/badge/Watch-Video%20Presentation-ef4444?style=for-the-badge&logo=youtube&logoColor=white" alt="Video Presentation" />
-  </a>
   <img src="https://img.shields.io/badge/Java-17%2B-f97316?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17+" />
   <img src="https://img.shields.io/badge/Database-MySQL%208.0-0284c7?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL 8.0" />
   <img src="https://img.shields.io/badge/License-MIT-8b5cf6?style=for-the-badge" alt="License" />
@@ -91,27 +88,6 @@
 </td>
 </tr>
 </table>
-
----
-
-## 🎥 Video Presentation & System Walkthrough
-
-Watch the complete technical presentation, architectural walkthrough, and live demonstration of the Online Examination Management System:
-
-<p align="center">
-  <a href="https://drive.google.com/file/d/1OsGQHxEmHiaKSQwqbjMwYxkCB3dn8TfZ/view?usp=sharing">
-    <img src="https://img.shields.io/badge/▶%20Watch%20Video%20Presentation-Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white" height="38" alt="Watch Presentation on Google Drive" />
-  </a>
-</p>
-
-> 📺 **Presentation Video Link**: [Online Examination System - Video Presentation (Google Drive)](https://drive.google.com/file/d/1OsGQHxEmHiaKSQwqbjMwYxkCB3dn8TfZ/view?usp=sharing)
->
-> **Walkthrough Agenda**:
-> 1. **System Architecture & Database Persistence**: Type-4 JDBC connection pooling, automated schema migrations, and ACID transactional persistence.
-> 2. **Cryptographic Defense & Security**: Military-grade PBKDF2-HMAC-SHA256 password hashing (120,000 rounds) and concurrent session locking.
-> 3. **Assessment Engine & UI/UX Design System**: In-memory state models, server-time synchronization, kiosk full-screen runner, and FlatLaf glassmorphic design.
-> 4. **AI-Assisted Proctoring & Integrity**: JVM-level keystroke hook interception, OS focus-loss detection, and webcam surveillance frame capture.
-> 5. **Psychometrics & Certification**: Item difficulty analysis ($P$), discrimination index ($D$), and dynamic vector PDF certificate compilation.
 
 ---
 
